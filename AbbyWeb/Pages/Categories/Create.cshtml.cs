@@ -22,9 +22,17 @@ namespace AbbyWeb.Pages.Categories
 
 		public async Task<IActionResult> OnPost()
 		{
-			await _context.Category.AddAsync(Category);
-			await _context.SaveChangesAsync();
-			return RedirectToPage("Index");
+			if (Category.Name == Category.DisplayOrder.ToString())
+			{
+				ModelState.AddModelError("Category.Name", "The DisplayOrder cannot exactly match the Name.");
+			}
+			if (ModelState.IsValid)
+			{
+				await _context.Category.AddAsync(Category);
+				await _context.SaveChangesAsync();
+				return RedirectToPage("Index");
+			}
+			return Page();
 
 		}
 	}
