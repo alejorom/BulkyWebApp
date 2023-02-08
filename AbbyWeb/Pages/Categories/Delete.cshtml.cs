@@ -29,6 +29,7 @@ namespace AbbyWeb.Pages.Categories
 			{
 				_context.Category.Remove(categoryFromDb);
 				await _context.SaveChangesAsync();
+				TempData["success"] = "Category deleted successfully";
 				return RedirectToPage("Index");
 			}
 
