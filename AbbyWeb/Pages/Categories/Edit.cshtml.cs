@@ -1,8 +1,7 @@
-using AbbyWeb.Abby.DataAccess.Data;
-using AbbyWeb.Abby.Models;
+using Abby.DataAccess.Data;
+using Abby.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 
 namespace AbbyWeb.Pages.Categories
 {

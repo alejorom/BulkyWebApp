@@ -1,7 +1,7 @@
-﻿using AbbyWeb.Abby.Models;
+﻿using Abby.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AbbyWeb.Abby.DataAccess.Data
+namespace Abby.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {

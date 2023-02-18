@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AbbyWeb.Abby.Models
+namespace Abby.Models
 {
     public class Category
     {
