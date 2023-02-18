@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\Categories\Create.cshtml" />
-    <Content Remove="Pages\Categories\Index.cshtml" />
+    <Content Remove="Pages\Admin\Categories\Create.cshtml" />
+    <Content Remove="Pages\Admin\Categories\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,25 +22,29 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Categories\Index.cshtml" />
+    <UpToDateCheckInput Remove="Pages\Admin\Categories\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Categories\Create.cshtml" />
-    <_ContentIncludedByDefault Remove="Pages\Categories\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Admin\Categories\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Admin\Categories\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\Categories\Create.cshtml" />
-    <None Include="Pages\Categories\Index.cshtml" />
+    <None Include="Pages\Admin\Categories\Create.cshtml" />
+    <None Include="Pages\Admin\Categories\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Categories\Create.cshtml" />
+    <UpToDateCheckInput Remove="Pages\Admin\Categories\Create.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Abby.DataAccess\Abby.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Customer\" />
   </ItemGroup>
 
 </Project>

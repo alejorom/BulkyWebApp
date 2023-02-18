@@ -3,22 +3,21 @@ using Abby.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AbbyWeb.Pages.Categories
+namespace AbbyWeb.Pages.Admin.Categories
 {
 	[BindProperties]
-	public class EditModel : PageModel
+	public class CreateModel : PageModel
     {
 		private readonly ApplicationDbContext _context;
 		public Category Category { get; set; }
 
-		public EditModel(ApplicationDbContext context)
+		public CreateModel(ApplicationDbContext context)
 		{
 			_context = context;
 		}
 
-		public void OnGet(int id)
-        {
-			Category = _context.Category.Find(id);
+		public void OnGet()
+		{
 		}
 
 		public async Task<IActionResult> OnPost()
@@ -29,9 +28,9 @@ namespace AbbyWeb.Pages.Categories
 			}
 			if (ModelState.IsValid)
 			{
-				_context.Category.Update(Category);
+				await _context.Category.AddAsync(Category);
 				await _context.SaveChangesAsync();
-				TempData["success"] = "Category updated successfully";
+				TempData["success"] = "Category created successfully";
 				return RedirectToPage("Index");
 			}
 			return Page();
