@@ -20,10 +20,5 @@ namespace Abby.DataAccess.Repository
 			objFromDb.DisplayOrder = category.DisplayOrder;
 		}
 
-		public void Save()
-		{
-			_context.SaveChanges();
-		}
-
 	}
 }

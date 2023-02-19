@@ -1,4 +1,5 @@
 using Abby.DataAccess.Data;
+using Abby.DataAccess.Repository.IRepository;
 using Abby.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,17 +9,17 @@ namespace AbbyWeb.Pages.Admin.Categories
 	[BindProperties]
 	public class EditModel : PageModel
     {
-		private readonly ApplicationDbContext _context;
+		private readonly IUnitOfWork _unitOfWork;
 		public Category Category { get; set; }
 
-		public EditModel(ApplicationDbContext context)
+		public EditModel(IUnitOfWork unitOfWork)
 		{
-			_context = context;
+			_unitOfWork = unitOfWork;
 		}
 
 		public void OnGet(int id)
         {
-			Category = _context.Category.Find(id);
+			Category = _unitOfWork.Category.GetFirstOrDefault (u => u.Id == id);
 		}
 
 		public async Task<IActionResult> OnPost()
@@ -29,8 +30,8 @@ namespace AbbyWeb.Pages.Admin.Categories
 			}
 			if (ModelState.IsValid)
 			{
-				_context.Category.Update(Category);
-				await _context.SaveChangesAsync();
+				_unitOfWork.Category.Update(Category);
+				_unitOfWork.Save();
 				TempData["success"] = "Category updated successfully";
 				return RedirectToPage("Index");
 			}
