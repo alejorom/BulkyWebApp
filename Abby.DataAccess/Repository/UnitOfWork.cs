@@ -12,10 +12,12 @@ namespace Abby.DataAccess.Repository
 			_context = context;
 			Category = new CategoryRepository(_context);
 			FoodType = new FoodTypeRepository(_context);
+			MenuItem = new MenuItemRepository(_context);
 		}
 
 		public ICategoryRepository Category { get; set; }
 		public IFoodTypeRepository FoodType { get; set; }
+		public IMenuItemRepository MenuItem { get; set; }
 
 		public void Dispose()
 		{
