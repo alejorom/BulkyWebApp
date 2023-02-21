@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Abby.DataAccess.Repository
 {
-	public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class
 	{
 		private readonly ApplicationDbContext _context;
 		internal DbSet<T> dbSet;
@@ -21,28 +21,44 @@ namespace Abby.DataAccess.Repository
 			dbSet.Add(entity);
 		}
 
-		public IEnumerable<T> GetAll(string? includeProperties)
-		{
-			IQueryable<T> query = dbSet;
-			if(includeProperties != null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>>? orderby = null, string ? includeProperties=null)
+        {
+            IQueryable<T> query = dbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            if (includeProperties != null)
+            {
+                foreach(var includeProperty in includeProperties.Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+			if (orderby != null)
 			{
-				foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-				{
-					query = query.Include(includeProperty);
-				}
+                return orderby(query).ToList();
 			}
-			return query.ToList();
-		}
+            return query.ToList();
+        }
 
-		public T GetFirstOrDefault(Expression<Func<T, bool>> filter)
-		{
-			IQueryable<T> query = dbSet;
-			if (filter != null)
-			{
-				query = query.Where(filter); ;
-			}
-			return query.FirstOrDefault();
-		}
+        public T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
+        {
+            IQueryable<T> query = dbSet;
+            if (filter != null)
+            {
+                query= query.Where(filter);
+            }
+            if (includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+            return query.FirstOrDefault();
+        }
 
 		public void Remove(T entity)
 		{
