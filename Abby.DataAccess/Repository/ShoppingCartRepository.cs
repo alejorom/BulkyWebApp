@@ -12,5 +12,19 @@ namespace Abby.DataAccess.Repository
         {
 			_context = context;
         }
+
+		public int DecrementCount(ShoppingCart shoppingCart, int count)
+		{
+			shoppingCart.Count -= count;
+			_context.SaveChanges();
+			return shoppingCart.Count;
+		}
+
+		public int IncrementCount(ShoppingCart shoppingCart, int count)
+		{
+			shoppingCart.Count += count;
+			_context.SaveChanges();
+			return shoppingCart.Count;
+		}
 	}
 }
