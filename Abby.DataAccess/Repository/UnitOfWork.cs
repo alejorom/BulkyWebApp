@@ -1,5 +1,6 @@
 ﻿using Abby.DataAccess.Data;
 using Abby.DataAccess.Repository.IRepository;
+using Abby.Models;
 
 namespace Abby.DataAccess.Repository
 {
@@ -13,11 +14,13 @@ namespace Abby.DataAccess.Repository
 			Category = new CategoryRepository(_context);
 			FoodType = new FoodTypeRepository(_context);
 			MenuItem = new MenuItemRepository(_context);
+			ShoppingCart = new ShoppingCartRepository(_context);
 		}
 
-		public ICategoryRepository Category { get; set; }
-		public IFoodTypeRepository FoodType { get; set; }
-		public IMenuItemRepository MenuItem { get; set; }
+		public ICategoryRepository Category { get; private set; }
+		public IFoodTypeRepository FoodType { get; private set; }
+		public IMenuItemRepository MenuItem { get; private set; }
+		public IShoppingCartRepository ShoppingCart { get; private set; }
 
 		public void Dispose()
 		{
