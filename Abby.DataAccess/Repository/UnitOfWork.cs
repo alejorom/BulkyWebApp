@@ -15,13 +15,16 @@ namespace Abby.DataAccess.Repository
 			FoodType = new FoodTypeRepository(_context);
 			MenuItem = new MenuItemRepository(_context);
 			ShoppingCart = new ShoppingCartRepository(_context);
+			OrderDetail = new OrderDetailRepository(_context);
+			OrderHeader = new OrderHeaderRepository(_context);
 		}
 
 		public ICategoryRepository Category { get; private set; }
 		public IFoodTypeRepository FoodType { get; private set; }
 		public IMenuItemRepository MenuItem { get; private set; }
 		public IShoppingCartRepository ShoppingCart { get; private set; }
-
+		public IOrderHeaderRepository OrderHeader { get; private set; }
+		public IOrderDetailRepository OrderDetail { get; private set; }
 		public void Dispose()
 		{
 			_context.Dispose();
