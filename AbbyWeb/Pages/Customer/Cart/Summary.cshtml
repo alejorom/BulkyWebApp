@@ -31,8 +31,8 @@
 										<label>Name</label>
 									</div>
 									<div class="col-9">
-										<input class="form-control" />
-										<span class="text-danger"></span>
+										<input asp-for="OrderHeader.PickupName" class="form-control" />
+										<span asp-validation-for="OrderHeader.PickupName" class="text-danger"></span>
 									</div>
 								</div>
 								<div class="row my-1">
@@ -40,8 +40,8 @@
 										<label>Phone Number</label>
 									</div>
 									<div class="col-9">
-										<input class="form-control" />
-										<span class="text-danger"></span>
+										<input asp-for="OrderHeader.PhoneNumber" class="form-control" />
+										<span asp-validation-for="OrderHeader.PhoneNumber" class="text-danger"></span>
 									</div>
 								</div>
 								<div class="row my-1">
@@ -49,8 +49,8 @@
 										<label>Pickup Date</label>
 									</div>
 									<div class="col-9">
-										<input value="" type="date" class="form-control" />
-										<span class="text-danger"></span>
+										<input value="" asp-for="OrderHeader.PickUpDate" type="date" class="form-control" />
+										<span asp-validation-for="OrderHeader.PickUpDate" class="text-danger"></span>
 									</div>
 								</div>
 								<div class="row my-1">
@@ -58,8 +58,8 @@
 										<label>Pickup Time</label>
 									</div>
 									<div class="col-9">
-										<input value="" type="time" class="form-control" />
-										<span class="text-danger"></span>
+										<input value="" asp-for="OrderHeader.PickUpTime" type="time" class="form-control" />
+										<span asp-validation-for="OrderHeader.PickUpTime" class="text-danger"></span>
 									</div>
 								</div>
 								<div class="row my-1">
@@ -67,7 +67,7 @@
 										<label>Additional Instructions: </label>
 									</div>
 									<div class="col-9">
-										<textarea style="height:100px;" class="form-control"></textarea>
+										<textarea asp-for="OrderHeader.Comments" style="height:100px;" class="form-control"></textarea>
 									</div>
 								</div>
 							</div>
@@ -107,3 +107,8 @@
 	</div>
 </form>
 
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
