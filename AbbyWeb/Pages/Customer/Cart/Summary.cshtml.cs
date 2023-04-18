@@ -1,10 +1,10 @@
-using Abby.DataAccess.Repository;
 using Abby.DataAccess.Repository.IRepository;
 using Abby.Models;
 using Abby.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Stripe.Checkout;
 using System.Security.Claims;
 
 namespace AbbyWeb.Pages.Customer.Cart
@@ -75,11 +75,43 @@ namespace AbbyWeb.Pages.Customer.Cart
 					};
 					_unitOfWork.OrderDetail.Add(orderDetails);
 				}
-
+				int quantity  = ShoppingCartList.ToList().Count;
 				_unitOfWork.ShoppingCart.RemoveRange(ShoppingCartList);
 				_unitOfWork.Save();
 
+				var domain = "https://localhost:44309/";
+				var options = new SessionCreateOptions
+				{
+					LineItems = new List<SessionLineItemOptions>
+					{
+						new SessionLineItemOptions
+						{
+							PriceData = new SessionLineItemPriceDataOptions
+							{
+								UnitAmount = (long)(OrderHeader.OrderTotal * 100),
+								Currency = "usd",
+								ProductData = new SessionLineItemPriceDataProductDataOptions
+								{
+									Name = "Abby Food Order"
+								},
+							},
+							Quantity = 1,
+						},
+					},
+					PaymentMethodTypes = new List<string>
+					{
+						"card",
+					},
+					Mode = "payment",
+					SuccessUrl = domain + "customer/cart/OrderConfirmation?id={OrderHeader.Id}",
+					CancelUrl = domain + "customer/cart/index",
+				};
 
+				var service = new SessionService();
+				Session session = service.Create(options);
+				Response.Headers.Add("Location", session.Url);
+				OrderHeader.TransactionId = session.Id;
+				return new StatusCodeResult(303);
 			}
 
 			return Page();
