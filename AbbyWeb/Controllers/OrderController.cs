@@ -1,4 +1,5 @@
 ﻿using Abby.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbbyWeb.Controllers
@@ -15,7 +16,8 @@ namespace AbbyWeb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+		[Authorize]
+		public IActionResult Get()
         {
 			var OrderHeaderList = _unitOfWork.OrderHeader.GetAll(includeProperties: "ApplicationUser");
 			return Json(new { data = OrderHeaderList });
