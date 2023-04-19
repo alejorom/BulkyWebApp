@@ -10,7 +10,7 @@ namespace Abby.DataAccess.Repository
 
         public OrderHeaderRepository(ApplicationDbContext context) : base(context)
         {
-			_context = _context;
+			_context = context;
         }
        
         public void Update(OrderHeader orderHeader)
@@ -18,5 +18,10 @@ namespace Abby.DataAccess.Repository
 			_context.OrderHeader.Update(orderHeader);
         }
 
+        public void UpdateStatus(int id, string status)
+        {
+            var orderFromDb = _context.OrderHeader.FirstOrDefault(u => u.Id == id);
+            if (orderFromDb != null) orderFromDb.Status = status;
+        }
     }
 }
