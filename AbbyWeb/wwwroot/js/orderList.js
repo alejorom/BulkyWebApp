@@ -1,8 +1,29 @@
 ﻿var dataTable;
 $(document).ready(function () {
+    var url = window.location.search;
+    if (url.includes("cancelled")) {
+        loadList("cancelled");
+    }
+    else {
+        if (url.includes("completed")) {
+            loadList("completed");
+        }
+        else {
+            if (url.includes("ready")) {
+                loadList("ready");
+            }
+            else {
+                loadList("inprocess");
+            }
+        }
+    }
+});
+
+
+function loadList(param) {
     dataTable = $('#DT_load').DataTable({
         "ajax": {
-            "url": "/api/order",
+            "url": "/api/order?status=" + param,
             "type": "GET",
             "datatype": "json"
         },
@@ -26,4 +47,4 @@ $(document).ready(function () {
         ],
         "width": "100%"
     });
-});
+}
