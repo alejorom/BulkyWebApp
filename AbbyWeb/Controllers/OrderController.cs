@@ -39,29 +39,6 @@ namespace AbbyWeb.Controllers
                     break;
             }
 
-            //if(status== "cancelled")
-            //{
-            //    OrderHeaderList = OrderHeaderList.Where(u => u.Status == SD.StatusCancelled || u.Status == SD.StatusRejected);
-            //}
-            //else
-            //{
-            //    if (status == "completed")
-            //    {
-            //        OrderHeaderList = OrderHeaderList.Where(u => u.Status == SD.StatusCompleted );
-            //    }
-            //    else
-            //    {
-            //        if (status == "ready")
-            //        {
-            //            OrderHeaderList = OrderHeaderList.Where(u => u.Status == SD.StatusReady);
-            //        }
-            //        else
-            //        {
-            //            OrderHeaderList = OrderHeaderList.Where(u => u.Status == SD.StatusSubmitted || u.Status == SD.StatusInProcess);
-            //        }
-            //    }
-            //}
-
             return Json(new { data = OrderHeaderList });
         }
 

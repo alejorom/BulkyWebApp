@@ -3,34 +3,18 @@
 
 @{
 	var status = HttpContext.Request.Query["status"];
-    var cancelled = "text-primary";
-    var completed = "text-primary";
-    var inProcess = "text-primary";
-    var ready = "text-primary";
+	var cancelled = "text-primary";
+	var completed = "text-primary";
+	var inProcess = "text-primary";
+	var ready = "text-primary";
 
-	if (status == "cancelled")
-    {
-        cancelled = "active text-white";
-    }
-    else
-    {
-        if (status == "completed")
-        {
-            completed = "active text-white";
-        }
-        else
-        {
-            if (status == "ready")
-            {
-                ready = "active text-white";
-            }
-            else
-            {
-                inProcess = "active text-white";
-            }
-        }
-    }
-
+	switch (status)
+	{
+		case "cancelled": cancelled = "active text-white"; break;
+		case "completed": completed = "active text-white"; break;
+		case "ready": ready = "active text-white"; break;
+		default: inProcess = "active text-white"; break;
+	}
 }
 
 <div class="container p-3">
